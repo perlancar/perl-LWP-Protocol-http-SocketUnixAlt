@@ -17,7 +17,8 @@ sub _new_socket {
 	my $sock = $self->socket_class->new(
 			Peer	=> $path,
 			Type	=> SOCK_STREAM,
-			Timeout	=> $timeout
+			Timeout	=> $timeout,
+			Host    => 'localhost',
 	);
 
 	unless($sock) {
