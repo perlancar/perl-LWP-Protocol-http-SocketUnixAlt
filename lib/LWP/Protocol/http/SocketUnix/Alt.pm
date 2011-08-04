@@ -48,7 +48,12 @@ sub request {
 
     my $url = $request->url;
 	my $path = ($url->host // "") . '/' . $url->path_query;
-	my $fullpath = "/";
+	my $fullpath;
+	if ($path =~ s!/(/.+)!!) {
+		$fullpath = $1;
+	} else {
+		$fullpath = "/";
+	}
 
     # connect to remote site
     my $socket = $self->_new_socket($path, $timeout);
