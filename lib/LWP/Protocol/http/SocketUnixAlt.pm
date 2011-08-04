@@ -1,4 +1,4 @@
-package LWP::Protocol::http::SocketUnix::Alt;
+package LWP::Protocol::http::SocketUnixAlt;
 
 use 5.010;
 use strict;
@@ -250,7 +250,7 @@ sub request {
     $response;
 }
 
-package LWP::Protocol::http::SocketUnix::Alt::Socket;
+package LWP::Protocol::http::SocketUnixAlt::Socket;
 
 use strict;
 use warnings;
@@ -281,19 +281,19 @@ __END__
 
 =head1 SYNOPSIS
 
-  use LWP::Protocol::http::SocketUnix::Alt;
-  LWP::Protocol::implementor( http => 'LWP::Protocol::http::SocketUnix::Alt' );
+  use LWP::Protocol::http::SocketUnixAlt;
+  LWP::Protocol::implementor( http => 'LWP::Protocol::http::SocketUnixAlt' );
   ...
 
 
 =head1 DESCRIPTION
 
-LWP::Protocol::http::UnixSocket::Alt is a fork of Florian Ragwitz's
+LWP::Protocol::http::UnixSocketAlt is a fork of Florian Ragwitz's
 LWP::Protocol::http::SocketUnix 0.02. It fixes a few issues including:
 
 =over 4
 
-=item * remedy 'No Host options provided' error 
+=item * remedy 'No Host options provided' error
 
 As suggested in https://rt.cpan.org/Public/Bug/Display.html?id=65670
 
