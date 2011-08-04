@@ -34,7 +34,7 @@ sub _new_socket {
 
 sub request {
     my($self, $request, undef, $arg, $size, $timeout) = @_;
-    LWP::Debug::trace('()');
+    #LWP::Debug::trace('()');
 
     $size ||= 4096;
 
@@ -250,7 +250,7 @@ sub request {
     $response;
 }
 
-package LWP::Protocol::http::SocketUnix::Socket;
+package LWP::Protocol::http::SocketUnix::Alt::Socket;
 
 use strict;
 use warnings;
