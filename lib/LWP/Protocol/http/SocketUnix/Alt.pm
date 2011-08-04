@@ -1,4 +1,4 @@
-package LWP::Protocol::http::SocketUnix;
+package LWP::Protocol::http::SocketUnix::Alt;
 
 use 5.010;
 use strict;
@@ -276,42 +276,38 @@ sub peerport { }
 sub peerhost { }
 
 1;
-
+# ABSTRACT: Speak HTTP through Unix sockets
 __END__
-
-=head1 NAME
-
-LWP::Protocol::http::SocketUnix - Speak HTTP through UNIX sockets
 
 =head1 SYNOPSIS
 
-  use LWP::Protocol::http::SocketUnix;
-  LWP::Protocol::implementor( http => 'LWP::Protocol::http::SocketUnix' );
+  use LWP::Protocol::http::SocketUnix::Alt;
+  LWP::Protocol::implementor( http => 'LWP::Protocol::http::SocketUnix::Alt' );
   ...
+
 
 =head1 DESCRIPTION
 
-LWP::Protocol::http::UnixSocket enables you to speak HTTP through UNIX sockets.
-To use it you need to overwrite the implementor class of the LWP 'http' scheme.
-All 'http' URIs will now be interpreted as local sockets by LWP.
+LWP::Protocol::http::UnixSocket::Alt is a fork of Florian Ragwitz's
+LWP::Protocol::http::SocketUnix 0.02. It fixes a few issues including:
 
-The interface of LWP::Protocol::http::SocketUnix is similar to
-LWP::Protocol::http, which LWP::Protocol::http::SocketUnix inherits from.
+=over 4
+
+=item * remedy 'No Host options provided' error 
+
+As suggested in https://rt.cpan.org/Public/Bug/Display.html?id=65670
+
+=item * allow specifying URI path
+
+Currently using "//" as separator, e.g.: "http:path/to/unix.socket//uri/path"
+
+=back
+
 
 =head1 SEE ALSO
 
-LWP, LWP::Protocol
+L<LWP>, L<LWP::Protocol>
 
-=head1 AUTHOR
-
-Florian Ragwitz, E<lt>flora@cpan.orgE<gt>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright (C) 2004 by Florian Ragwitz
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.8.4 or,
-at your option, any later version of Perl 5 you may have available.
+L<HTTP::Daemon::UNIX>
 
 =cut
