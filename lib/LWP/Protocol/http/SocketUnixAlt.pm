@@ -289,7 +289,7 @@ __END__
 =head1 DESCRIPTION
 
 LWP::Protocol::http::UnixSocketAlt is a fork of Florian Ragwitz's
-LWP::Protocol::http::SocketUnix 0.02. It fixes a few issues including:
+L<LWP::Protocol::http::SocketUnix> 0.02. It fixes a few issues including:
 
 =over 4
 
