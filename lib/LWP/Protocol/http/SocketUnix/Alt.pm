@@ -1,5 +1,6 @@
 package LWP::Protocol::http::SocketUnix;
 
+use 5.010;
 use strict;
 use warnings;
 use vars qw( @ISA $VERSION );
@@ -8,7 +9,7 @@ use LWP::Protocol::http;
 
 @ISA = qw( LWP::Protocol::http );
 
-$VERSION = 0.02;
+# VERSION
 
 sub _new_socket {
 	my ($self, $path, $timeout) = @_;
