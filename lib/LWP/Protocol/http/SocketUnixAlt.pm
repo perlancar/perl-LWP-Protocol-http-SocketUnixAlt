@@ -1,6 +1,6 @@
 package LWP::Protocol::http::SocketUnixAlt;
 
-use 5.010;
+use 5.010001;
 use strict;
 use warnings;
 use vars qw( @ISA $VERSION );
