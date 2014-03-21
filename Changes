@@ -1,5 +1,12 @@
 Revision history for LWP-Protocol-http-SocketUnixAlt
 
+0.0204   2014-04-21 (SHARYANTO)
+
+         - No functional changes.
+
+         - Tweak path parsing so it works.
+
+
 0.0203   2013-09-09 (SHARYANTO)
 
          - No functional changes. Rebuild with MakeMaker instead of
@@ -14,4 +21,3 @@ Revision history for LWP-Protocol-http-SocketUnixAlt
 0.0201  2011-08-04 (SHARYANTO)
 
         - First release, forked from LWP-Protocol-http-SocketUnix-0.02.
-
