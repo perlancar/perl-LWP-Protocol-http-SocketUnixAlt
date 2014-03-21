@@ -47,7 +47,7 @@ sub request {
     }
 
     my $url = $request->url;
-	my $path = ($url->host // "") . '/' . $url->path_query;
+	my $path = $url->path_query;
 	my $fullpath;
 	if ($path =~ s!/(/.+)!!) {
 		$fullpath = $1;
