@@ -6,6 +6,8 @@ use warnings;
 use vars qw( @ISA $VERSION );
 use IO::Socket;
 use LWP::Protocol::http;
+use Scalar::Util qw(blessed);
+use URI;
 
 @ISA = qw( LWP::Protocol::http );
 
@@ -32,6 +34,25 @@ sub _new_socket {
 	$sock;
 }
 
+sub _parse_url {
+    my $self = shift if blessed($_[0]) && $_->isa(__PACKAGE__);
+
+    my $url = shift;
+    $url = URI->new($url) unless blessed($url);
+
+    my $path = $url->path_query;
+    my ($sock_path, $uri_path);
+    if ($path =~ m!(.+)/(/.*)!) {
+        $sock_path = $1;
+        $uri_path  = $2;
+    } else {
+        $sock_path = $path;
+        $uri_path  = "/";
+    }
+
+    ($sock_path, $uri_path);
+}
+
 sub request {
     my($self, $request, undef, $arg, $size, $timeout) = @_;
     #LWP::Debug::trace('()');
@@ -47,16 +68,10 @@ sub request {
     }
 
     my $url = $request->url;
-	my $path = $url->path_query;
-	my $fullpath;
-	if ($path =~ s!/(/.+)!!) {
-		$fullpath = $1;
-	} else {
-		$fullpath = "/";
-	}
+    my ($sock_path, $uri_path) = $self->_parse_url($url);
 
     # connect to remote site
-    my $socket = $self->_new_socket($path, $timeout);
+    my $socket = $self->_new_socket($sock_path, $timeout);
     $self->_check_sock($request, $socket);
 
     my @h;
@@ -100,7 +115,7 @@ sub request {
 		}
     }
 
-    my $req_buf = $socket->format_request($method, $fullpath, @h);
+    my $req_buf = $socket->format_request($method, $uri_path, @h);
     #print "------\n$req_buf\n------\n";
 
     # XXX need to watch out for write timeouts
